@@ -1,3 +1,72 @@
-[gd_scene format=3 uid="uid://brwu66r3jyaty"]
+[gd_scene load_steps=14 format=3 uid="uid://brwu66r3jyaty"]
+
+[ext_resource type="Material" uid="uid://bgxa4ogxjswr8" path="res://Materials/Bottom.tres" id="1_jhuth"]
+[ext_resource type="Script" path="res://Scripts/Borehole.gd" id="1_m6m6y"]
+[ext_resource type="ArrayMesh" uid="uid://cv1myg7mggd5l" path="res://Models/GeologyBottom.obj" id="1_owiy0"]
+[ext_resource type="ArrayMesh" uid="uid://kjqs0i6fgrbs" path="res://Models/GeologyLayer.obj" id="2_d5466"]
+[ext_resource type="ArrayMesh" uid="uid://dn4xfmxj8rmqq" path="res://Models/GeologySurface.obj" id="3_avi6y"]
+[ext_resource type="Material" uid="uid://b5wm25mboljf7" path="res://Materials/Surface.tres" id="4_6r1u8"]
+[ext_resource type="ArrayMesh" uid="uid://dv15c5hrrx2yv" path="res://Models/BoreholeBottom.obj" id="4_u1lje"]
+[ext_resource type="Material" uid="uid://d2fn0j3vu1ju" path="res://Materials/Steel.tres" id="5_hox2q"]
+[ext_resource type="ArrayMesh" uid="uid://di7n00qccdwx3" path="res://Models/BoreholeCasing.obj" id="5_lmu2d"]
+[ext_resource type="ArrayMesh" uid="uid://bjc3kl0r4v8gw" path="res://Models/BoreholeTop.obj" id="6_8y18b"]
+[ext_resource type="Material" uid="uid://dr7dsyl3wiy5q" path="res://Materials/Mortar.tres" id="11_ftkem"]
+[ext_resource type="ArrayMesh" uid="uid://cdittcmm2c3wc" path="res://Models/Mortar.obj" id="11_ybcn5"]
+[ext_resource type="ArrayMesh" uid="uid://ctwyxovm0jlj5" path="res://Models/MortarTop.obj" id="12_wnvjy"]
 
 [node name="Setup" type="Node3D"]
+
+[node name="Borehole" type="Node3D" parent="."]
+script = ExtResource("1_m6m6y")
+
+[node name="Geology" type="Node3D" parent="Borehole"]
+
+[node name="Bottom" type="MeshInstance3D" parent="Borehole/Geology"]
+material_override = ExtResource("1_jhuth")
+mesh = ExtResource("1_owiy0")
+skeleton = NodePath("../../..")
+
+[node name="Layer" type="MeshInstance3D" parent="Borehole/Geology"]
+mesh = ExtResource("2_d5466")
+skeleton = NodePath("../../..")
+
+[node name="Surface" type="MeshInstance3D" parent="Borehole/Geology"]
+material_override = ExtResource("4_6r1u8")
+mesh = ExtResource("3_avi6y")
+skeleton = NodePath("../../..")
+
+[node name="Structure" type="Node3D" parent="Borehole"]
+
+[node name="BoreholeBottom" type="MeshInstance3D" parent="Borehole/Structure"]
+material_override = ExtResource("5_hox2q")
+mesh = ExtResource("4_u1lje")
+skeleton = NodePath("../../..")
+
+[node name="BoreholeCasing" type="MeshInstance3D" parent="Borehole/Structure"]
+material_override = ExtResource("5_hox2q")
+mesh = ExtResource("5_lmu2d")
+skeleton = NodePath("../../..")
+
+[node name="BoreholeTop" type="MeshInstance3D" parent="Borehole/Structure"]
+material_override = ExtResource("5_hox2q")
+mesh = ExtResource("6_8y18b")
+skeleton = NodePath("../../..")
+
+[node name="Mortar" type="MeshInstance3D" parent="Borehole/Structure"]
+material_override = ExtResource("11_ftkem")
+mesh = ExtResource("11_ybcn5")
+skeleton = NodePath("../../..")
+
+[node name="MortarTop" type="MeshInstance3D" parent="Borehole/Structure"]
+material_override = ExtResource("11_ftkem")
+mesh = ExtResource("12_wnvjy")
+skeleton = NodePath("../../..")
+
+[node name="View" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628075, 0)
+
+[node name="Camera" type="Camera3D" parent="View"]
+transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 2.81748e-08, 0.779327, 0.626617, -8.27582e-08, 0.626617, -0.779327, 0, 6.47744, -5.48058)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.556992, 0.830518, 0, -0.830518, -0.556992, 0, 8, 0)

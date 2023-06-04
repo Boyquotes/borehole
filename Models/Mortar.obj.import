@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cdittcmm2c3wc"
+path="res://.godot/imported/Mortar.obj-f223afda560f5202bc4f9ea49d13fecf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Mortar.obj-f223afda560f5202bc4f9ea49d13fecf.mesh"]
+
+source_file="res://Models/Mortar.obj"
+dest_files=["res://.godot/imported/Mortar.obj-f223afda560f5202bc4f9ea49d13fecf.mesh", "res://.godot/imported/Mortar.obj-f223afda560f5202bc4f9ea49d13fecf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

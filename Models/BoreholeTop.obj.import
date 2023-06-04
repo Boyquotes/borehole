@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bjc3kl0r4v8gw"
+path="res://.godot/imported/BoreholeTop.obj-51bee78270809fb5dce33db4e558e829.mesh"
+
+[deps]
+
+files=["res://.godot/imported/BoreholeTop.obj-51bee78270809fb5dce33db4e558e829.mesh"]
+
+source_file="res://Models/BoreholeTop.obj"
+dest_files=["res://.godot/imported/BoreholeTop.obj-51bee78270809fb5dce33db4e558e829.mesh", "res://.godot/imported/BoreholeTop.obj-51bee78270809fb5dce33db4e558e829.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

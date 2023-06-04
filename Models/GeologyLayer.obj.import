@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://kjqs0i6fgrbs"
+path="res://.godot/imported/GeologyLayer.obj-5837af97a36f6c0d0fd4e01958dcfa5e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/GeologyLayer.obj-5837af97a36f6c0d0fd4e01958dcfa5e.mesh"]
+
+source_file="res://Models/GeologyLayer.obj"
+dest_files=["res://.godot/imported/GeologyLayer.obj-5837af97a36f6c0d0fd4e01958dcfa5e.mesh", "res://.godot/imported/GeologyLayer.obj-5837af97a36f6c0d0fd4e01958dcfa5e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
