@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://5e1kk3o1wwg8"]
+
+[ext_resource type="Shader" path="res://Shaders/GeologyLayer.gdshader" id="1_0lyrl"]
+[ext_resource type="Texture2D" uid="uid://p5604n7fn87k" path="res://Textures/Dirt.jpg" id="2_kh8ko"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0lyrl")
+shader_parameter/scale = 1.0
+shader_parameter/mask = ExtResource("2_kh8ko")
