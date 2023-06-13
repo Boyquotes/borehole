@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Borehole"
+config/name="Deep Borehole Repository"
 run/main_scene="res://Scenes/Setup.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+Hud="*res://Scenes/HUD.tscn"
 
 [input]
 
@@ -50,4 +55,4 @@ rotate_view={
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_2d=2

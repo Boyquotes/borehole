@@ -18,6 +18,7 @@ func _unhandled_input(event):
 	if self.rotating:
 		if event.is_class('InputEventMouseMotion'):
 			self.rotate_y(deg_to_rad(-event.relative.x * sensitivity))
+			self.rotate_x(deg_to_rad(event.relative.y * sensitivity))
 			self.rotation.z = 0.0
 	if event.is_action('rotate_view'):
 		self.rotating = not self.rotating
@@ -27,8 +28,5 @@ func _physics_process(delta):
 	if self.flying:
 		self.velocity.y = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
 		
-		self.flyVelocity = Input.get_action_strength("fly_up") - Input.get_action_strength("fly_down")
-		
-		self.translate_object_local(velocity * speed * delta)
-		self.global_translate(Vector3.UP * flyVelocity * speed * delta)
+		self.global_translate(velocity * speed * delta)
 	pass

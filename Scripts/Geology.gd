@@ -28,6 +28,7 @@ func generateGeology():
 	for layer in self.layers:
 		self.createLayer(layer[0], layer[1], depth, layer[2])
 		depth += layer[2]
+	$Bottom.translate(Vector3(0, -2*depth, 0))
 	pass
 
 func createLayer(title, material, depth, thickness):

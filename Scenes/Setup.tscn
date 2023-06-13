@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://brwu66r3jyaty"]
+[gd_scene load_steps=31 format=3 uid="uid://brwu66r3jyaty"]
 
 [ext_resource type="Material" uid="uid://bgxa4ogxjswr8" path="res://Materials/Bottom.tres" id="1_jhuth"]
 [ext_resource type="Script" path="res://Scripts/Borehole.gd" id="1_m6m6y"]
 [ext_resource type="ArrayMesh" uid="uid://cv1myg7mggd5l" path="res://Models/GeologyBottom.obj" id="1_owiy0"]
+[ext_resource type="ArrayMesh" uid="uid://dyy0858v523ca" path="res://Models/Terrain.obj" id="1_y8v2q"]
 [ext_resource type="Script" path="res://Scripts/Geology.gd" id="2_1v5dg"]
 [ext_resource type="ArrayMesh" uid="uid://kjqs0i6fgrbs" path="res://Models/GeologyLayer.obj" id="2_d5466"]
 [ext_resource type="ArrayMesh" uid="uid://dn4xfmxj8rmqq" path="res://Models/GeologySurface.obj" id="3_avi6y"]
@@ -15,7 +16,63 @@
 [ext_resource type="Material" uid="uid://dr7dsyl3wiy5q" path="res://Materials/Mortar.tres" id="11_ftkem"]
 [ext_resource type="ArrayMesh" uid="uid://cdittcmm2c3wc" path="res://Models/Mortar.obj" id="11_ybcn5"]
 [ext_resource type="ArrayMesh" uid="uid://ctwyxovm0jlj5" path="res://Models/MortarTop.obj" id="12_wnvjy"]
+[ext_resource type="ArrayMesh" uid="uid://cc5f03yoyilwi" path="res://Models/Container.obj" id="16_fsu16"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="16_su5x5"]
+[ext_resource type="Script" path="res://Scripts/Containers.gd" id="17_c4r0t"]
+[ext_resource type="ArrayMesh" uid="uid://g1pnfbmjdbmu" path="res://Models/ContainerConcrete.obj" id="18_78qel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qut8"]
+albedo_color = Color(0, 0.498039, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h357o"]
+albedo_color = Color(0.905882, 0.686275, 0, 1)
+metallic = 1.0
+metallic_specular = 1.0
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpab0"]
+albedo_color = Color(0.254902, 0.254902, 0.254902, 1)
+metallic_specular = 0.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gyrj5"]
+
+[sub_resource type="Animation" id="Animation_3mn3f"]
+resource_name = "CasingRotation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.203063, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ev5wd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5ypf"]
+_data = {
+"CasingRotation": SubResource("Animation_3mn3f"),
+"RESET": SubResource("Animation_ev5wd")
+}
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_uqic7"]
 rayleigh_coefficient = 0.22
@@ -34,9 +91,16 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Setup" type="Node3D"]
 
+[node name="Terrain" type="Node3D" parent="."]
+visible = false
+
+[node name="Surface" type="MeshInstance3D" parent="Terrain"]
+material_override = SubResource("StandardMaterial3D_4qut8")
+mesh = ExtResource("1_y8v2q")
+skeleton = NodePath("../..")
+
 [node name="Borehole" type="Node3D" parent="."]
 script = ExtResource("1_m6m6y")
-depth = 5.0
 
 [node name="Geology" type="Node3D" parent="Borehole"]
 script = ExtResource("2_1v5dg")
@@ -65,6 +129,7 @@ mesh = ExtResource("4_u1lje")
 skeleton = NodePath("../../..")
 
 [node name="Casing" type="MeshInstance3D" parent="Borehole/Structure"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 material_override = ExtResource("5_hox2q")
 mesh = ExtResource("5_lmu2d")
 skeleton = NodePath("../../..")
@@ -84,15 +149,66 @@ material_override = ExtResource("11_ftkem")
 mesh = ExtResource("12_wnvjy")
 skeleton = NodePath("../../..")
 
+[node name="Containers" type="Node3D" parent="Borehole"]
+script = ExtResource("17_c4r0t")
+
+[node name="Container" type="MeshInstance3D" parent="Borehole/Containers"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_h357o")
+mesh = ExtResource("16_fsu16")
+skeleton = NodePath("../../..")
+
+[node name="Concrete" type="MeshInstance3D" parent="Borehole/Containers/Container"]
+material_override = SubResource("StandardMaterial3D_wpab0")
+mesh = ExtResource("18_78qel")
+skeleton = NodePath("../../../..")
+
+[node name="AreaCollider" type="Area3D" parent="Borehole"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Borehole/AreaCollider"]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 0, -1, 0)
+shape = SubResource("CylinderShape3D_gyrj5")
+
+[node name="Control" type="Control" parent="Borehole"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PreviewPanel" type="Panel" parent="Borehole/Control"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 56.0
+
+[node name="Label" type="Label" parent="Borehole/Control/PreviewPanel"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 16.0
+offset_right = 95.0
+offset_bottom = 42.0
+text = "Borehole Repository"
+
+[node name="BoreholePlayer" type="AnimationPlayer" parent="Borehole"]
+root_node = NodePath("../Structure/Casing")
+libraries = {
+"": SubResource("AnimationLibrary_y5ypf")
+}
+
 [node name="View" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.628075, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.85614, 0)
 script = ExtResource("16_su5x5")
 
 [node name="Camera" type="Camera3D" parent="View"]
-transform = Transform3D(-1, -2.99004e-08, 8.21505e-08, 7.21347e-09, 0.908267, 0.41839, -8.71247e-08, 0.41839, -0.908267, 0, 4.12174, -5.48058)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -8)
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.587277, 0.809386, 0, -0.809386, -0.587277, 0, 8, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_p7j87")
+
+[connection signal="input_event" from="Borehole/AreaCollider" to="Borehole" method="_on_area_collider_input_event"]
+[connection signal="mouse_entered" from="Borehole/AreaCollider" to="Borehole" method="_on_area_collider_mouse_entered"]
+[connection signal="mouse_exited" from="Borehole/AreaCollider" to="Borehole" method="_on_area_collider_mouse_exited"]

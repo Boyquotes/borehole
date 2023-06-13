@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g1pnfbmjdbmu"
+path="res://.godot/imported/ContainerConcrete.obj-b3a292e02a31138bfd7f9c82642eebbf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ContainerConcrete.obj-b3a292e02a31138bfd7f9c82642eebbf.mesh"]
+
+source_file="res://Models/ContainerConcrete.obj"
+dest_files=["res://.godot/imported/ContainerConcrete.obj-b3a292e02a31138bfd7f9c82642eebbf.mesh", "res://.godot/imported/ContainerConcrete.obj-b3a292e02a31138bfd7f9c82642eebbf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
